@@ -1,0 +1,25 @@
+default:
+  image: node:20-alpine
+
+# Cache modules in between jobs
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - .npm/
+
+before_script:
+  - if [ ! -f .env ]; then cp .env.exemple .env; fi
+  - echo "Mocking environment variables"
+  - echo "DATA_PATH=/mock/path" >> .env  # Mock the DATA_PATH
+  - echo "FILE_PATH=/mock/file/path" >> .env  # Mock the FILE_PATH
+
+tests:
+  script:
+   - npm ci --cache .npm --prefer-offline
+   - npm run test
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}
+    policy: pull-push
+    paths:
+      - .npm/
+  coverage: /All files[^\|]*\|[^\|]*\s+([\d\.]+)/

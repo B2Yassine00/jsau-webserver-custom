@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title><%= recette.name %></title>  
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="title-container">  
+    <h1 class="title"><%= recette.name %></h1>
+  </div>
+  <div style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
+    <h3 class="title">Content:</h3>
+    <p><%= recette.content %></p>
+  </div>
+  
+  <div style="display: flex; justify-content: center; align-items: center; gap: 1rem;">
+    <a style="background-color: green; padding: 8px 20px;" href="/recette/download/<%= recette.name %>">
+      Download
+    </a>
+
+    <button class="button-9 add-to-favorites" style="background-color: rgb(196, 196, 28);" data-filename="<%= recette.name %>">Favorites</button> 
+  </div>
+  <div style="height: 10%;display: flex;justify-content: center;padding: 1rem;align-items: center;">
+    <a style="background-color: green; padding: 8px 20px;" href="/recettes">
+      Back to Recettes
+    </a>
+  </div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Recettes</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="title-container">
+    <h1 class="title">Recettes</h1>
+  </div>
+  <div class="form-controll">
+    <form class="form-style form-controll-docs" method="GET" action="/recettes">
+      <div>
+        <input class="input-login" type="text" name="search" placeholder="Search recettes">
+      </div>
+      <div>      
+        <button class="button-9 button-search" type="submit">Search</button>
+      </div>
+    </form>  
+  </div>
+  <div class="fav-button">
+    <a href="/favorites" style="background-color: rgb(255, 180, 249); padding: 8px 20px;">Show Favorites</a>
+  </div>
+
+  <div class="docs-container">
+    <table>
+      <thead>
+        
+      </thead>
+      <tbody>
+        <% recettes.forEach(recette => { %>
+          <tr>
+            <td><%= recette.name %></td>
+            <td style="gap: 0.5rem; display: flex; justify-content: center;">
+              <a style="background-color: rgb(255, 218, 252); padding: 8px 20px;" href="/recette/<%= recette.id %>">View</a> 
+              <form action="/favorites/add" method="POST" style="display: inline;" onsubmit="return showAlert();">
+                <input type="hidden" name="filename" value="<%= recette.name %>">
+                <button class="button-9" style="background-color: rgb(255, 180, 249);" type="submit">Favorites</button>
+              </form>
+              <a style="background-color: rgb(255, 73, 240); padding: 8px 20px;" href="/recette/download/<%= recette.name %>">
+                Download
+              </a>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+  <script>
+    function showAlert() {
+      alert('Recette added to favorites successfully!');
+      return true;
+    }
+  </script>
+</body>
+</html>

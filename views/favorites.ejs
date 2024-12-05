@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Favorites</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="title-container">
+    <h1 class="title">Your Favorites</h1>
+  </div>
+
+  <% if (favorites.length > 0) { %>
+    <div class="docs-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Recettes</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% favorites.forEach(fav => { %>
+            <tr>
+              <td><%= fav.filename %></td>
+              <td>
+                <form action="/favorites/delete" method="POST" style="display: inline;">
+                  <input type="hidden" name="filename" value="<%= fav.filename %>">
+                  <button class="button-9" style="background-color: rgb(160, 13, 13);" type="submit">Remove</button>
+                </form>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  <% } else { %>
+    <div style="display: flex; justify-content: center; align-items: center;">
+      <p>You have no favorites.</p>
+    </div>
+  <% } %>
+
+  <div style="height: 10%;display: flex;justify-content: center;padding: 1rem;align-items: center;">
+    <a style="background-color: rgb(245, 204, 255); padding: 8px 20px;" href="/recettes">
+      Back to Recettes
+    </a>
+  </div>
+</body>
+</html>
